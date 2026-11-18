@@ -31,9 +31,7 @@ function memoryRepository() {
   };
 }
 
-var fallo1 = 1;
-
-function postgresRepository(connectionString) {
+                  function postgresRepository(connectionString) {
   const { Pool } = require('pg');
   const pool = new Pool({
     connectionString,
@@ -43,11 +41,11 @@ function postgresRepository(connectionString) {
       await pool.query(`CREATE TABLE IF NOT EXISTS tasks (
         id SERIAL PRIMARY KEY,
         title TEXT NOT NULL,
-        done BOOLEAN NOT NULL DEFAULT FALSE
+                          done BOOLEAN NOT NULL DEFAULT FALSE
       )`);
     },
     async list() {
-      const result = await pool.query('SELECT id, title, done FROM tasks ORDER BY id');
+                              const result = await pool.query('SELECT id, title, done FROM tasks ORDER BY id');
       return result.rows;
     },
     async create({ title, done }) {
@@ -64,12 +62,12 @@ function postgresRepository(connectionString) {
       );
       return result.rows[0] || null;
     },
-    async close() {
+                    async close() {
       await pool.end();
     },
   };
 }
-module.exports = {
+                    module.exports = {
   memoryRepository,
   postgresRepository,
 };
