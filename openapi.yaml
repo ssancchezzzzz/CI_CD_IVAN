@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: Tasks API CI/CD
+  version: 1.0.0
+  description: API educativa para prácticas de automatización.
+security: []
+servers:
+  - url: http://localhost:3000
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      summary: Salud del proceso
+      responses:
+        '200': { description: OK }
+  /ready:
+    get:
+      operationId: getReady
+      summary: Disponibilidad del repositorio de datos
+      responses:
+        '200': { description: OK }
+        '503': { description: No disponible }
+  /version:
+    get:
+      operationId: getVersion
+      summary: Versión desplegada
+      responses:
+        '200': { description: OK }
+  /tasks:
+    get:
+      operationId: listTasks
+      summary: Lista las tareas
+      responses:
+        '200': { description: Lista de tareas }
+    post:
+      operationId: createTask
+      summary: Crea una tarea
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title: { type: string }
+      responses:
+        '201': { description: Tarea creada }
+        '400': { description: Título no válido }
+  /tasks/{id}/complete:
+    patch:
+      operationId: completeTask
+      summary: Marca tarea como completada
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer }
+      responses:
+        '200': { description: Tarea actualizada }
+        '404': { description: No encontrada }
