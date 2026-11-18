@@ -1,13 +1,27 @@
 name: Hola Actions
 
 on:
-  push:
+  push: 
+    branches:
+      - feature/*
+      - main
   workflow_dispatch:
 
 permissions: {}
 
 jobs:
   hola:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Saludar
+        run: echo 'Hola desde GitHub Actions'
+      - name: Fallo controlado
+        run: exit 1
+      - name: Mostrar fecha
+        run: date
+  adios:
+    # needs: hola
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/main')
     runs-on: ubuntu-latest
     steps:
       - name: Saludar

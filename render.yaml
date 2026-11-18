@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: tasks-api-cicd-demoasdasd
+    name: tasks-api-cicd-demo
     runtime: docker
     plan: free
     healthCheckPath: /health
