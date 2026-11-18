@@ -16,8 +16,12 @@ test('flujo de tareas', async () => {
   if (process.env.READ_ONLY === 'true') return;
   const created = await fetch(`${base}/tasks`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ title: 'E2E' }),
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      title: 'E2E',
+    }),
   });
   assert.equal(created.status, 201);
   const task = await created.json();

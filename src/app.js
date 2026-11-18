@@ -4,13 +4,21 @@ function createApp(repository) {
   const app = express();
   const service = createService(repository);
   app.use(express.json());
-  app.get('/health', (req, res) => res.json({ status: 'ok' }));
+  app.get('/health', (req, res) =>
+    res.json({
+      status: 'ok',
+    }),
+  );
   app.get('/ready', async (req, res) => {
     try {
       await repository.list();
-      res.json({ status: 'ready' });
+      res.json({
+        status: 'ready',
+      });
     } catch {
-      res.status(503).json({ status: 'unavailable' });
+      res.status(503).json({
+        status: 'unavailable',
+      });
     }
   });
   app.get('/version', (req, res) =>
@@ -39,10 +47,18 @@ function createApp(repository) {
       next(e);
     }
   });
-  app.get('/openapi.yaml', (req, res) => res.sendFile('openapi.yaml', { root: process.cwd() }));
+  app.get('/openapi.yaml', (req, res) =>
+    res.sendFile('openapi.yaml', {
+      root: process.cwd(),
+    }),
+  );
   app.use((err, req, res, next) =>
-    res.status(err.status || 500).json({ error: err.status ? err.message : 'Error interno' }),
+    res.status(err.status || 500).json({
+      error: err.status ? err.message : 'Error interno',
+    }),
   );
   return app;
 }
-module.exports = { createApp };
+module.exports = {
+  createApp,
+};

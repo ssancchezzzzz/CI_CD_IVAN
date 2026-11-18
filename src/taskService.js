@@ -11,7 +11,10 @@ function createService(repository) {
     list: () => repository.list(),
     async create(data) {
       const title = validateTitle(data?.title);
-      return repository.create({ title, done: false });
+      return repository.create({
+        title,
+        done: false,
+      });
     },
     async complete(id) {
       const updated = await repository.complete(Number(id));
@@ -24,4 +27,7 @@ function createService(repository) {
     },
   };
 }
-module.exports = { validateTitle, createService };
+module.exports = {
+  validateTitle,
+  createService,
+};

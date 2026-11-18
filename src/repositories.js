@@ -4,25 +4,37 @@ function memoryRepository() {
   return {
     async init() {},
     async list() {
-      return tasks.map((x) => ({ ...x }));
+      return tasks.map((x) => ({
+        ...x,
+      }));
     },
     async create({ title, done }) {
-      const task = { id: nextId++, title, done };
+      const task = {
+        id: nextId++,
+        title,
+        done,
+      };
       tasks.push(task);
-      return { ...task };
+      return {
+        ...task,
+      };
     },
     async complete(id) {
       const task = tasks.find((t) => t.id === id);
       if (!task) return null;
       task.done = true;
-      return { ...task };
+      return {
+        ...task,
+      };
     },
     async close() {},
   };
 }
 function postgresRepository(connectionString) {
   const { Pool } = require('pg');
-  const pool = new Pool({ connectionString });
+  const pool = new Pool({
+    connectionString,
+  });
   return {
     async init() {
       await pool.query(`CREATE TABLE IF NOT EXISTS tasks (
@@ -54,4 +66,7 @@ function postgresRepository(connectionString) {
     },
   };
 }
-module.exports = { memoryRepository, postgresRepository };
+module.exports = {
+  memoryRepository,
+  postgresRepository,
+};
