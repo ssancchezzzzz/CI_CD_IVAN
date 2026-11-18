@@ -31,7 +31,7 @@ function memoryRepository() {
   };
 }
 
-                  function postgresRepository(connectionString) {
+function postgresRepository(connectionString) {
   const { Pool } = require('pg');
   const pool = new Pool({
     connectionString,
@@ -45,7 +45,7 @@ function memoryRepository() {
       )`);
     },
     async list() {
-                              const result = await pool.query('SELECT id, title, done FROM tasks ORDER BY id');
+      const result = await pool.query('SELECT id, title, done FROM tasks ORDER BY id');
       return result.rows;
     },
     async create({ title, done }) {
@@ -62,12 +62,12 @@ function memoryRepository() {
       );
       return result.rows[0] || null;
     },
-                    async close() {
+    async close() {
       await pool.end();
     },
   };
 }
-                    module.exports = {
+module.exports = {
   memoryRepository,
   postgresRepository,
 };

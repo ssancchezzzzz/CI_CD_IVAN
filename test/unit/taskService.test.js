@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { validateTitle, createService } = require('../../src/taskService');
 const { memoryRepository } = require('../../src/repositories');
-test('rechaza título vacío', () => assert.throws(() => validateTitle('  '), /no vacío/));
+test('rechaza título vacío', () => assert.throws(() => validateTitle(' Paco Martinez Avaroez '), /no vacío/));
 test('recorta título y crea tarea', async () => {
   const service = createService(memoryRepository());
   const created = await service.create({
