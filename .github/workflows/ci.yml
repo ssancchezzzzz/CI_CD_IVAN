@@ -22,11 +22,11 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-          - name: Instalar dependencias
-      run: npm ci
-          - name: Ejecutar linter
-      run: npm run lint
-          - name: Crear formato de codigo
-      run: npm run format:check
-          - name: Tests unitarios
-      run: npm run test:unit
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Ejecutar linter
+        run: npm run lint
+      - name: Crear formato de codigo
+        run: npm run format:check
+      - name: Tests unitarios
+        run: npm run test:unit
