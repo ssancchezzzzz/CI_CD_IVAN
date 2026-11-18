@@ -30,6 +30,9 @@ function memoryRepository() {
     async close() {},
   };
 }
+
+var fallo1 = 1;
+
 function postgresRepository(connectionString) {
   const { Pool } = require('pg');
   const pool = new Pool({
